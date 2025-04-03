@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import org.apache.commons.lang3.StringUtils;
 
 @Controller
 public class PdfController {
@@ -29,12 +30,23 @@ public class PdfController {
     }
 
     @PostMapping("/compress")
-    public ResponseEntity<Resource> compressPdf(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<Resource> compressPdf(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam(value = "fileSuffix", required = false) String fileSuffix) throws IOException {
         try {
             byte[] compressedPdf = pdfCompressionService.compressPdf(file);
             ByteArrayResource resource = new ByteArrayResource(compressedPdf);
 
-            String filename = "compressed_" + file.getOriginalFilename();
+            // 如果未提供尾綴或為空白，使用預設值 "compressed"
+            String suffix = StringUtils.isBlank(fileSuffix) ? "_compressed" : "_" + fileSuffix;
+            String filename = file.getOriginalFilename();
+            if (filename != null && filename.toLowerCase().endsWith(".pdf")) {
+                String baseName = filename.substring(0, filename.lastIndexOf("."));
+                filename = baseName + suffix + ".pdf";
+            } else {
+                filename = "compressed" + suffix + ".pdf";
+            }
+            
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_PDF)
                     .header(HttpHeaders.CONTENT_DISPOSITION, 

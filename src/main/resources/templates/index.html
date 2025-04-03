@@ -2,61 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>PDF 壓縮工具</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .upload-form {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .file-input {
-            margin: 20px 0;
-        }
-        .submit-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-    </style>
+    <title>PDF 壓縮工具 | PDF Compression Tool</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
     <div class="container">
-        <h1>PDF 壓縮工具</h1>
+        <h1>
+            PDF 壓縮工具
+            <span class="bilingual">PDF Compression Tool</span>
+        </h1>
         <div class="upload-form">
-            <form action="/compress" method="post" enctype="multipart/form-data">
+            <form action="/compress" method="post" enctype="multipart/form-data" id="compression-form">
                 <div class="file-input">
+                    <label class="file-label">
+                        選擇PDF檔案
+                        <span class="bilingual">Select PDF File</span>
+                    </label>
                     <input type="file" name="file" accept=".pdf" required>
                 </div>
-                <button type="submit" class="submit-btn">壓縮 PDF</button>
+                <div class="suffix-input">
+                    <label for="fileSuffix">
+                        檔案名稱尾綴
+                        <span class="bilingual">File Name Suffix</span>
+                    </label>
+                    <input type="text" id="fileSuffix" name="fileSuffix" placeholder="請輸入檔案名稱尾綴 (Enter file suffix)">
+                </div>
+                <button type="submit" class="submit-btn">
+                    壓縮 PDF
+                    <span class="bilingual">Compress PDF</span>
+                </button>
             </form>
         </div>
     </div>
+
+    <!-- 煙火特效的畫布 Fireworks Effect Canvas -->
+    <canvas id="fireworks-container"></canvas>
+
+    <!-- 成功下載訊息 Success Message -->
+    <div class="success-message" id="success-message">
+        <h2>
+            檔案壓縮完成！
+            <span class="bilingual">Compression Complete!</span>
+        </h2>
+        <p>
+            PDF文件已成功壓縮並開始下載。
+            <span class="bilingual">The PDF file has been compressed and download has started.</span>
+        </p>
+    </div>
+
+    <script th:src="@{/js/scripts.js}"></script>
 </body>
 </html>
