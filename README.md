@@ -11,6 +11,7 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 - 提供簡單的網頁界面，支援繁體中文和英文雙語顯示
 - 支援中文檔案名稱
 - 支援自定義檔案名稱尾綴，預設為 "compressed"
+- 支援自定義壓縮參數調整（圖片品質和解析度）
 - 下載完成時顯示煙火特效動畫
 - 保持 PDF 文件的可讀性
 - 提供便捷的啟動腳本，支援 Windows 和 Unix-like 系統
@@ -21,7 +22,8 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 - Compress PDF by reducing DPI and image quality
 - Simple web interface with Traditional Chinese and English bilingual display
 - Support Chinese filename
-- Support customized file name suffix, default is "compressed" 
+- Support customized file name suffix, default is "compressed"
+- Support customized compression parameters (image quality and resolution)
 - Fireworks animation effect after download completion
 - Maintain PDF readability
 - Convenient startup scripts for both Windows and Unix-like systems
@@ -96,9 +98,12 @@ java -jar target/pdf-compressor-1.0.0.jar
    - 如果瀏覽器沒有自動開啟，請手動訪問上述網址
 2. 點擊「選擇檔案」按鈕，選擇要壓縮的 PDF 文件
 3. 輸入自定義檔案名稱尾綴（可選，若未輸入則預設使用 "compressed"）
-4. 點擊「壓縮 PDF」按鈕
-5. 等待處理完成後，壓縮後的 PDF 文件會自動下載，同時顯示煙火特效動畫
-6. 下載的檔案名稱將顯示為「原始檔名_尾綴.pdf」格式
+4. 調整壓縮參數（可選）：
+   - 壓縮品質 (0.0-1.0)：控制圖像品質，數值越低壓縮率越高但品質越差，預設值為 0.5
+   - 解析度 DPI (72-600)：控制圖像解析度，數值越低文件越小但清晰度越低，預設值為 150
+5. 點擊「壓縮 PDF」按鈕
+6. 等待處理完成後，壓縮後的 PDF 文件會自動下載，同時顯示煙火特效動畫
+7. 下載的檔案名稱將顯示為「原始檔名_尾綴.pdf」格式
 
 ## 技術細節 / Technical Details
 
@@ -106,11 +111,12 @@ java -jar target/pdf-compressor-1.0.0.jar
 - PDF 處理庫 / PDF Library: Apache PDFBox 3.0.1
 - 前端技術 / Frontend:
   - 使用原生 JavaScript 實現煙火特效
+  - 使用滑桿控件實現參數調整
   - 支援響應式佈局
   - 雙語界面設計
 - 壓縮方式 / Compression Method:
-  - 圖片品質 / Image Quality: 50%
-  - 輸出 DPI: 150
+  - 圖片品質 / Image Quality: 可調整範圍 0.0-1.0，預設 0.5
+  - 輸出 DPI: 可調整範圍 72-600，預設 150
 - 啟動腳本特性 / Startup Script Features:
   - 自動配置 4GB Java 堆內存
   - 自動檢測 Java 環境
@@ -118,7 +124,15 @@ java -jar target/pdf-compressor-1.0.0.jar
   - 優雅的服務終止處理
   - 完整的運行日誌顯示
 
-## 最新更新 / Latest Updates (2025/04/03)
+## 最新更新 / Latest Updates (2025/04/04)
+
+- 新增自定義壓縮參數調整功能，可調整：
+  - 壓縮品質 (COMPRESSION_QUALITY)
+  - 解析度 (DPI)
+- 為壓縮參數添加了滑桿控件和即時數值顯示
+- 為參數添加了說明提示，方便用戶了解參數的作用
+
+### 先前更新 (2025/04/03)
 
 - 新增雙語界面（繁體中文+英文）
 - 新增自定義檔案名稱尾綴功能

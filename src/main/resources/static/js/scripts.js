@@ -145,6 +145,26 @@ function startFireworks() {
 
 // 當頁面載入完成後綁定事件 Bind events after page load
 document.addEventListener('DOMContentLoaded', function() {
+    // 設定壓縮參數滑桿的實時顯示 Set up real-time display for compression parameter sliders
+    const compressionQualitySlider = document.getElementById('compressionQuality');
+    const compressionQualityValue = document.getElementById('compressionQualityValue');
+    const dpiSlider = document.getElementById('dpi');
+    const dpiValue = document.getElementById('dpiValue');
+    
+    // 更新壓縮品質值 Update compression quality value
+    if (compressionQualitySlider && compressionQualityValue) {
+        compressionQualitySlider.addEventListener('input', function() {
+            compressionQualityValue.textContent = this.value;
+        });
+    }
+    
+    // 更新 DPI 值 Update DPI value
+    if (dpiSlider && dpiValue) {
+        dpiSlider.addEventListener('input', function() {
+            dpiValue.textContent = this.value;
+        });
+    }
+    
     // 當表單提交時，攔截並處理下載 Intercept form submission and handle download
     document.getElementById('compression-form').addEventListener('submit', function(event) {
         const form = this;

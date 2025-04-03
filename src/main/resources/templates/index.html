@@ -27,6 +27,44 @@
                     </label>
                     <input type="text" id="fileSuffix" name="fileSuffix" placeholder="請輸入檔案名稱尾綴 (Enter file suffix)">
                 </div>
+                
+                <!-- 壓縮參數設定區 Compression Settings Section -->
+                <div class="compression-settings">
+                    <h3>壓縮參數設定 <span class="bilingual">Compression Settings</span></h3>
+                    
+                    <div class="setting-item">
+                        <label for="compressionQuality">
+                            壓縮品質 (0.0-1.0)
+                            <span class="bilingual">Compression Quality (0.0-1.0)</span>
+                            <div class="tooltip-text">
+                                控制 JPEG 壓縮品質，範圍是 0.0-1.0。數值越低，檔案越小，但品質越差。
+                                <span class="bilingual">Controls JPEG compression quality, range 0.0-1.0. Lower values result in smaller files but lower quality.</span>
+                            </div>
+                        </label>
+                        <div class="range-with-value">
+                            <input type="range" id="compressionQuality" name="compressionQuality" 
+                                   min="0" max="1" step="0.05" value="0.5" class="range-slider">
+                            <span id="compressionQualityValue">0.5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label for="dpi">
+                            解析度 DPI
+                            <span class="bilingual">Resolution DPI</span>
+                            <div class="tooltip-text">
+                                設定輸出圖像的解析度，標準列印品質通常為 300 DPI。數值越低，檔案越小，但品質越差。
+                                <span class="bilingual">Sets output image resolution. Standard print quality is usually 300 DPI. Lower values result in smaller files but lower quality.</span>
+                            </div>
+                        </label>
+                        <div class="range-with-value">
+                            <input type="range" id="dpi" name="dpi" 
+                                   min="72" max="600" step="1" value="150" class="range-slider">
+                            <span id="dpiValue">150</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <button type="submit" class="submit-btn">
                     壓縮 PDF
                     <span class="bilingual">Compress PDF</span>

@@ -32,9 +32,19 @@ public class PdfController {
     @PostMapping("/compress")
     public ResponseEntity<Resource> compressPdf(
             @RequestParam("file") MultipartFile file,
-            @RequestParam(value = "fileSuffix", required = false) String fileSuffix) throws IOException {
+            @RequestParam(value = "fileSuffix", required = false) String fileSuffix,
+            @RequestParam(value = "compressionQuality", required = false, defaultValue = "0.5") float compressionQuality,
+            @RequestParam(value = "dpi", required = false, defaultValue = "150") int dpi) throws IOException {
         try {
-            byte[] compressedPdf = pdfCompressionService.compressPdf(file);
+            // 確保壓縮品質在有效範圍內 (0.0-1.0)
+            if (compressionQuality < 0.0f) compressionQuality = 0.0f;
+            if (compressionQuality > 1.0f) compressionQuality = 1.0f;
+            
+            // 確保 DPI 在合理範圍內 (最小 72, 最大 600)
+            if (dpi < 72) dpi = 72;
+            if (dpi > 600) dpi = 600;
+            
+            byte[] compressedPdf = pdfCompressionService.compressPdf(file, compressionQuality, dpi);
             ByteArrayResource resource = new ByteArrayResource(compressedPdf);
 
             // 如果未提供尾綴或為空白，使用預設值 "compressed"
