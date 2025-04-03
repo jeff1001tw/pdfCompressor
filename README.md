@@ -11,6 +11,7 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 - 提供簡單的網頁界面
 - 支援中文檔案名稱
 - 保持 PDF 文件的可讀性
+- 提供Windows和macOS/Linux系統的快速啟動腳本
 
 ---
 
@@ -19,6 +20,7 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 - Simple web interface
 - Support Chinese filename
 - Maintain PDF readability
+- Provide quick start scripts for Windows and macOS/Linux
 
 ## 系統需求 / Requirements
 
@@ -27,34 +29,51 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 
 ## 安裝與執行 / Installation and Running
 
-### 方法一：直接執行 JAR 檔案 / Method 1: Run JAR file directly
+### 方法一：使用快速啟動腳本（推薦）/ Method 1: Using Quick Start Scripts (Recommended)
+
+#### Windows:
+1. 下載並解壓縮發布包
+2. 雙擊執行 `start-pdf-compressor.cmd`
+3. 程式會自動啟動並打開瀏覽器
+
+#### macOS/Linux:
+1. 下載並解壓縮發布包
+2. 打開終端機，進入解壓目錄
+3. 執行以下命令：
+```bash
+chmod +x start-pdf-compressor.sh
+./start-pdf-compressor.sh
+```
+4. 程式會自動啟動並打開瀏覽器
+
+### 方法二：直接執行 JAR 檔案 / Method 2: Run JAR file directly
 
 1. 下載 `pdf-compressor-1.0.0.jar`
 2. 開啟終端機，切換到 jar 檔案所在目錄
 3. 執行以下命令：
-```
+```bash
 java -jar pdf-compressor-1.0.0.jar
 ```
 
-### 方法二：從原始碼構建 / Method 2: Build from source
+### 方法三：從原始碼構建 / Method 3: Build from source
 
 1. 克隆專案 / Clone the repository
-```
+```bash
 git clone https://github.com/jeff1001tw/pdfCompressor.git
 ```
 
 2. 進入專案目錄 / Enter project directory
-```
+```bash
 cd pdfCompressor
 ```
 
 3. 使用 Maven 構建專案 / Build with Maven
-```
+```bash
 ./mvnw clean package
 ```
 
 4. 執行應用程序 / Run the application
-```
+```bash
 java -jar target/pdf-compressor-1.0.0.jar
 ```
 
@@ -78,11 +97,12 @@ java -jar target/pdf-compressor-1.0.0.jar
 - 處理大型文件可能需要較長時間
 - 建議保留原始文件的備份
 - 某些 PDF 可能因特殊字體而出現警告訊息，但不影響功能
+- 啟動腳本已預設配置 4GB 記憶體，適合處理較大的 PDF 文件
 
 ---
 
-處理大型文件時建議增加 Java 堆內存，可使用以下命令：
-For large files, it's recommended to increase Java heap memory using:
-```
+如需手動調整 Java 記憶體配置，可使用以下命令：
+To manually adjust Java heap memory, use the following command:
+```bash
 java -Xmx4g -jar pdf-compressor-1.0.0.jar
 ```
