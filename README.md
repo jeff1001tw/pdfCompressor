@@ -8,8 +8,10 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 
 - 支援上傳最大 200MB 的 PDF 文件
 - 透過降低 DPI 和圖片品質來壓縮 PDF
-- 提供簡單的網頁界面
+- 提供簡單的網頁界面，支援繁體中文和英文雙語顯示
 - 支援中文檔案名稱
+- 支援自定義檔案名稱尾綴，預設為 "compressed"
+- 下載完成時顯示煙火特效動畫
 - 保持 PDF 文件的可讀性
 - 提供便捷的啟動腳本，支援 Windows 和 Unix-like 系統
 
@@ -17,8 +19,10 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 
 - Support PDF files up to 200MB
 - Compress PDF by reducing DPI and image quality
-- Simple web interface
+- Simple web interface with Traditional Chinese and English bilingual display
 - Support Chinese filename
+- Support customized file name suffix, default is "compressed" 
+- Fireworks animation effect after download completion
 - Maintain PDF readability
 - Convenient startup scripts for both Windows and Unix-like systems
 
@@ -91,13 +95,19 @@ java -jar target/pdf-compressor-1.0.0.jar
 1. 啟動應用程序後，瀏覽器會自動開啟並訪問：http://localhost:8080
    - 如果瀏覽器沒有自動開啟，請手動訪問上述網址
 2. 點擊「選擇檔案」按鈕，選擇要壓縮的 PDF 文件
-3. 點擊「壓縮 PDF」按鈕
-4. 等待處理完成後，壓縮後的 PDF 文件會自動下載
+3. 輸入自定義檔案名稱尾綴（可選，若未輸入則預設使用 "compressed"）
+4. 點擊「壓縮 PDF」按鈕
+5. 等待處理完成後，壓縮後的 PDF 文件會自動下載，同時顯示煙火特效動畫
+6. 下載的檔案名稱將顯示為「原始檔名_尾綴.pdf」格式
 
 ## 技術細節 / Technical Details
 
 - 框架 / Framework: Spring Boot 3.2.0
 - PDF 處理庫 / PDF Library: Apache PDFBox 3.0.1
+- 前端技術 / Frontend:
+  - 使用原生 JavaScript 實現煙火特效
+  - 支援響應式佈局
+  - 雙語界面設計
 - 壓縮方式 / Compression Method:
   - 圖片品質 / Image Quality: 50%
   - 輸出 DPI: 150
@@ -107,6 +117,14 @@ java -jar target/pdf-compressor-1.0.0.jar
   - 自動打開默認瀏覽器
   - 優雅的服務終止處理
   - 完整的運行日誌顯示
+
+## 最新更新 / Latest Updates (2025/04/03)
+
+- 新增雙語界面（繁體中文+英文）
+- 新增自定義檔案名稱尾綴功能
+- 新增下載完成煙火特效
+- 優化代碼結構，將 HTML、CSS 和 JavaScript 分離為獨立文件
+- 改進錯誤處理機制
 
 ## 注意事項 / Notes
 
