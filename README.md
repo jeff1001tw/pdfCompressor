@@ -11,6 +11,7 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 - 提供簡單的網頁界面
 - 支援中文檔案名稱
 - 保持 PDF 文件的可讀性
+- 提供便捷的啟動腳本，支援 Windows 和 Unix-like 系統
 
 ---
 
@@ -19,11 +20,13 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 - Simple web interface
 - Support Chinese filename
 - Maintain PDF readability
+- Convenient startup scripts for both Windows and Unix-like systems
 
 ## 系統需求 / Requirements
 
 - Java 21 或更高版本 / Java 21 or higher
 - 支援的作業系統：Windows, macOS, Linux / Supported OS: Windows, macOS, Linux
+- 4GB 以上可用記憶體（已在啟動腳本中配置）/ 4GB or more available memory (configured in startup scripts)
 
 ## 安裝與執行 / Installation and Running
 
@@ -33,6 +36,9 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 1. 下載並解壓縮發布包
 2. 雙擊執行 `start-pdf-compressor.cmd`
 3. 程式會自動啟動並開啟瀏覽器
+4. 要停止服務，直接關閉命令提示字元視窗即可
+
+Windows 用戶將看到完整的運行日誌，並可以通過關閉視窗來停止服務。
 
 #### macOS/Linux:
 1. 下載並解壓縮發布包
@@ -41,10 +47,13 @@ This is a PDF compression tool developed using Spring Boot and PDFBox.
 ```
 chmod +x start-pdf-compressor.sh
 ```
-4. 雙擊執行 `start-pdf-compressor.sh` 或在終端機中執行：
+4. 運行腳本：
 ```
 ./start-pdf-compressor.sh
 ```
+5. 要停止服務，按 Ctrl+C 即可
+
+Unix-like 系統用戶可以看到完整的運行日誌，並透過 Ctrl+C 正常終止服務。
 
 ### 方法二：直接執行 JAR 檔案 / Method 2: Run JAR file directly
 
@@ -79,7 +88,8 @@ java -jar target/pdf-compressor-1.0.0.jar
 
 ## 使用方法 / Usage
 
-1. 啟動應用程序後，打開瀏覽器訪問：http://localhost:8080
+1. 啟動應用程序後，瀏覽器會自動開啟並訪問：http://localhost:8080
+   - 如果瀏覽器沒有自動開啟，請手動訪問上述網址
 2. 點擊「選擇檔案」按鈕，選擇要壓縮的 PDF 文件
 3. 點擊「壓縮 PDF」按鈕
 4. 等待處理完成後，壓縮後的 PDF 文件會自動下載
@@ -91,26 +101,31 @@ java -jar target/pdf-compressor-1.0.0.jar
 - 壓縮方式 / Compression Method:
   - 圖片品質 / Image Quality: 50%
   - 輸出 DPI: 150
+- 啟動腳本特性 / Startup Script Features:
+  - 自動配置 4GB Java 堆內存
+  - 自動檢測 Java 環境
+  - 自動打開默認瀏覽器
+  - 優雅的服務終止處理
+  - 完整的運行日誌顯示
 
 ## 注意事項 / Notes
 
 - 處理大型文件可能需要較長時間
 - 建議保留原始文件的備份
 - 某些 PDF 可能因特殊字體而出現警告訊息，但不影響功能
+- 啟動腳本已經自動配置了合適的記憶體大小，一般無需手動調整
 
----
+## 疑難排解 / Troubleshooting
 
-處理大型文件時建議增加 Java 堆內存，可使用以下命令：
-For large files, it's recommended to increase Java heap memory using:
-```
-java -Xmx4g -jar pdf-compressor-1.0.0.jar
-```
+1. 如果無法啟動服務：
+   - 確認 Java 21 已正確安裝
+   - 確認 8080 端口未被占用
+   - 檢查系統可用記憶體是否足夠
 
-## 啟動腳本功能 / Startup Scripts Features
+2. 如果瀏覽器沒有自動打開：
+   - Windows: 手動訪問 http://localhost:8080
+   - macOS/Linux: 手動執行 `open http://localhost:8080`
 
-- 自動檢查 Java 環境
-- 自動配置 4GB 記憶體空間
-- 自動開啟默認瀏覽器
-- 提供友善的使用者介面
-- 支援中文檔案名稱
-- 適配 Windows/macOS/Linux 系統
+3. 如果需要更改記憶體配置：
+   - Windows: 編輯 start-pdf-compressor.cmd 中的 JAVA_OPTS
+   - Unix: 編輯 start-pdf-compressor.sh 中的 JAVA_OPTS
